@@ -18,17 +18,29 @@ function reject(collection, predicate) {
   let results = [];
 
   for (let item of collection) {
-    // This is your job. :)
+    if (!predicate(item)){
+      results.push(item);
+    }
   }
 
   return results;
 }
+
+let isEven = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/isEven/isEven');
+let isPowerOfTwo = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/isPowerOfTwo/isPowerOfTwo');
+let isPrime = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/isPrime/isPrime');
+
 
 if (require.main === module) {
   console.log('Running sanity checks for reject:');
 
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
+
+
+  console.log(reject([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], isEven));
+  console.log(reject([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], isPowerOfTwo));
+  console.log(reject([1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16], isPrime));
 }
 
 module.exports = reject;
