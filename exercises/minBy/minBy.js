@@ -17,18 +17,14 @@
  * @returns {any} The element `x` in `collection` with the smallest value of `fn(x)`.
  */
 function minBy(collection, fn) {
-  const arraySizes = [];
+  
+  let runningSmallest = collection[0];
   for (let item of collection){
-    arraySizes.push(fn(item));
-  }
-  let runningSmallest = arraySizes[0];
-  for (let item of arraySizes){
-    if (item < runningSmallest){
+    if (fn(item) < fn(runningSmallest)){
       runningSmallest = item;
     }
   }
-  let index = arraySizes.indexOf(runningSmallest);
-  return collection[index];
+  return runningSmallest;
 }
 
 function strLength(str){
