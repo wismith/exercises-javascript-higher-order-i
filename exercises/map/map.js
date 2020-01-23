@@ -24,17 +24,26 @@ function map(collection, fn) {
   let results = [];
 
   for (let item of collection) {
-    // This is your job. :)
+    results.push(fn(item));
   }
 
   return results;
 }
+
+let primeFactors = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/primeFactors/primeFactors');
+let isEven = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/isEven/isEven');
+let capitalize = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/strings/capitalize/capitalize');
+
 
 if (require.main === module) {
   console.log('Running sanity checks for map:');
 
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
+
+  console.log(map([6,12,15,24],primeFactors));
+  console.log(map([1,2,3,4,5,6,7,8,9,10], isEven));
+  console.log(map(['hello', 'will', 'davidson'], capitalize));
 }
 
 module.exports = map;
