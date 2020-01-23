@@ -17,7 +17,23 @@
  * @returns {any} The element `x` in `collection` with the largest value of `fn(x)`.
  */
 function maxBy(collection, predicate) {
-  // This is your job. :)
+  let runningLargest = collection[0];
+  for (let item of collection){
+    if (predicate(item) > predicate(runningLargest)){
+      runningLargest = item;
+    }
+  }
+  return runningLargest;
+}
+
+function strLength(str){
+  return str.length;
+}
+
+let primeFactors = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/primeFactors/primeFactors');
+
+function numPrimeFactors(num){
+  return primeFactors(num).length;
 }
 
 if (require.main === module) {
@@ -26,6 +42,9 @@ if (require.main === module) {
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
   // How can you be sure it's returning the FIRST thing it finds? Does it matter?
+
+  console.log(maxBy(['hello', 'hi', 'what', 'I'], strLength) === 'hello');
+  console.log(maxBy([6,12,9,24], numPrimeFactors) === 24);
 }
 
 module.exports = maxBy;
