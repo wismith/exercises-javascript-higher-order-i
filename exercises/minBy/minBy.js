@@ -17,7 +17,24 @@
  * @returns {any} The element `x` in `collection` with the smallest value of `fn(x)`.
  */
 function minBy(collection, fn) {
-  // This is your job. :)
+  
+  let runningSmallest = collection[0];
+  for (let item of collection){
+    if (fn(item) < fn(runningSmallest)){
+      runningSmallest = item;
+    }
+  }
+  return runningSmallest;
+}
+
+function strLength(str){
+  return str.length;
+}
+
+let primeFactors = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/primeFactors/primeFactors');
+
+function numPrimeFactors(num){
+  return primeFactors(num).length;
 }
 
 if (require.main === module) {
@@ -26,6 +43,9 @@ if (require.main === module) {
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
   // How can you be sure it's returning the FIRST thing it finds? Does it matter?
+
+  console.log(minBy(['hello', 'hi', 'I', 'playing'], strLength) === 'I');
+  console.log(minBy([4,8,12,24,16], numPrimeFactors) === 4);
 }
 
 module.exports = minBy;
