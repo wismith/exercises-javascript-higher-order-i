@@ -17,18 +17,13 @@
  * @returns {any} The element `x` in `collection` with the largest value of `fn(x)`.
  */
 function maxBy(collection, predicate) {
-  const arraySizes = [];
+  let runningLargest = collection[0];
   for (let item of collection){
-    arraySizes.push(predicate(item));
-  }
-  let runningLargest = arraySizes[0];
-  for (let item of arraySizes){
-    if (item > runningLargest){
+    if (predicate(item) > predicate(runningLargest)){
       runningLargest = item;
     }
   }
-  let index = arraySizes.indexOf(runningLargest);
-  return collection[index];
+  return runningLargest;
 }
 
 function strLength(str){
