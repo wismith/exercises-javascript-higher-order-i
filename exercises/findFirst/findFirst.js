@@ -13,11 +13,16 @@
  *  returns `true` or `undefined` if nothing is found.
  */
 function findFirst(collection, predicate) {
-  // This is your job. :)
-  // Remember, you will return as soon as JavaScript
-  // sees the `return` keyword. That means you can return
-  // without having to iterate over the entire list.
+  for (let item of collection){
+    if (predicate(item)){
+      return item;
+    }
+  }
+  return undefined;
 }
+
+let isPrime = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/isPrime/isPrime');
+let isOdd = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/isOdd/isOdd');
 
 if (require.main === module) {
   console.log('Running sanity checks for findFirst:');
@@ -25,6 +30,9 @@ if (require.main === module) {
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
   // How can you be sure it's returning the FIRST thing it finds? Does it matter?
+
+  console.log(findFirst([4,6,8,9,10,11], isPrime) === 11);
+  console.log(findFirst([4,6,8,9,10,11], isOdd) === 9);
 }
 
 module.exports = findFirst;
