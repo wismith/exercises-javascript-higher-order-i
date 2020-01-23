@@ -11,22 +11,46 @@
  *  returns `true`
  */
 function count(collection, predicate) {
-  let total = 0;
-
-  for (let item of collection) {
+  return fold(collection, function(acc, item) {
     if (predicate(item)) {
-      total += 1;
+      return acc + 1;
+    } else {
+      return acc;
     }
-  }
-
-  return total;
+  }, 0);
 }
+
+function isEven(item){
+  if (item % 2 === 0){
+    return true;
+  }
+  return false;
+}
+let isPrime = require('/Users/willsmith/Desktop/exercises-javascript-fundamentals/exercises/numbers/isPrime/isPrime');
+
+
+function fold(collection, fn, init){
+  let acc = init;
+  for (let item of collection){
+    acc = fn(acc, item);
+  }
+  return acc;
+
+}
+
+fold([1,2,3,4,5,6], function(acc,item){
+  let collection = [item];
+
+},0);
 
 if (require.main === module) {
   console.log('Running sanity checks for count:');
 
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
+
+  console.log(count([1,2,3,4,5,6,7,8], isEven) === 4);
+  console.log(count([1,2,3,4,5,6,7,8], isPrime) === 4);
 }
 
 module.exports = count;
