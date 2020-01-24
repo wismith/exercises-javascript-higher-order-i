@@ -35,13 +35,8 @@ function fold(collection, fn, init){
     acc = fn(acc, item);
   }
   return acc;
-
 }
 
-fold([1,2,3,4,5,6], function(acc,item){
-  let collection = [item];
-
-},0);
 
 if (require.main === module) {
   console.log('Running sanity checks for count:');
