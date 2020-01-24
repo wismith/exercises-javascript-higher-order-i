@@ -12,14 +12,39 @@
  *  element of `collection` and `false` otherwise.
  */
 function every(collection, predicate) {
-  // This is your job. :)
+  return fold(collection, function(acc,item){
+    if (!predicate(item)){
+      acc = false;
+    } 
+    return acc;
+  },true);
+
+  
 }
 
+function fold(collection, fn, init){
+  let acc = init;
+  for (let item of collection){
+    acc = fn(acc, item);
+  }
+  return acc;
+}
+
+function isEven(n){
+  return n % 2 === 0;
+}
+
+function isPositive(n){
+  return n > 0;
+}
 if (require.main === module) {
   console.log('Running sanity checks for every:');
 
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
+
+  console.log(every([1,2,3,4],isEven) === false);
+  console.log(every([1,2,3,4], isPositive) === true);
 }
 
 module.exports = every;
