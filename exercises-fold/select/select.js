@@ -10,16 +10,30 @@
  * @returns {array} A new array containing the elements of `collection`
  *   for which `predicate` returns `true`
  */
-function select(collection, predicate) {
+function select(collection, fn) {
   // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
 
-  let results = [];
+  return fold(collection, function(acc,item){
+    if (fn(item)){
+      acc.push(item);
+    }
+    return acc;
+  },[]);
+}
 
-  for (let item of collection) {
-    // This is your job. :)
+function fold(collection, fn, init){
+  let acc = init;
+  for (let item of collection){
+    acc = fn(acc, item);
   }
+  return acc;
+}
 
-  return results;
+function isEven(n){
+  return n % 2 === 0;
+}
+function isPositive(n){
+  return n > 0;
 }
 
 if (require.main === module) {
@@ -27,6 +41,9 @@ if (require.main === module) {
 
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
+
+  console.log(select([1,2,3,4,5,6],isEven));
+  console.log(select([-1,4,0,-5,7],isPositive));
 }
 
 module.exports = select;
