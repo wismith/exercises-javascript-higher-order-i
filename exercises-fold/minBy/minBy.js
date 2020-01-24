@@ -17,14 +17,16 @@
  * @returns {any} The element `x` in `collection` with the smallest value of `fn(x)`.
  */
 function minBy(collection, fn) {
-  
-  let runningSmallest = collection[0];
-  for (let item of collection){
-    if (fn(item) < fn(runningSmallest)){
-      runningSmallest = item;
+  return fold(collection, function(acc,item){
+    if (!acc){
+      acc = collection[0];
     }
-  }
-  return runningSmallest;
+    if (fn(item) < fn(acc)){
+      acc = item;
+    }
+    return acc;
+  }, undefined);
+  
 }
 
 function strLength(str){
@@ -35,6 +37,15 @@ let primeFactors = require('/Users/willsmith/Desktop/exercises-javascript-fundam
 
 function numPrimeFactors(num){
   return primeFactors(num).length;
+}
+
+
+function fold(collection, fn, init){
+  let acc = init;
+  for (let item of collection){
+    acc = fn(acc, item);
+  }
+  return acc;
 }
 
 if (require.main === module) {
