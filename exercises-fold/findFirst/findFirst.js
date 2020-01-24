@@ -13,10 +13,27 @@
  *  returns `true` or `undefined` if nothing is found.
  */
 function findFirst(collection, predicate) {
-  // This is your job. :)
-  // Remember, you will return as soon as JavaScript
-  // sees the `return` keyword. That means you can return
-  // without having to iterate over the entire list.
+  return fold(collection, function(acc,item){
+    if (!acc && predicate(item)){
+      acc = item;
+    }
+    return acc;
+  }, undefined);
+}
+
+function isEven(n){
+  return n % 2 === 0;
+}
+function isPositive(n){
+  return n > 0;
+}
+
+function fold(collection, fn, init){
+  let acc = init;
+  for (let item of collection){
+    acc = fn(acc, item);
+  }
+  return acc;
 }
 
 if (require.main === module) {
@@ -25,6 +42,9 @@ if (require.main === module) {
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
   // How can you be sure it's returning the FIRST thing it finds? Does it matter?
+
+  console.log(findFirst([1,2,3,4], isEven) === 2);
+  console.log(findFirst([-3,-5,0,1], isPositive) === 1);
 }
 
 module.exports = findFirst;
