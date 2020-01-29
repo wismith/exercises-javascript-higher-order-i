@@ -19,22 +19,42 @@
  * @returns {any[]} A new array constructed by applying `fn` to each
  *  element of `collection`
  */
-function map(collection, fn) {
-  // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
-  let results = [];
-
-  for (let item of collection) {
-    // This is your job. :)
-  }
-
-  return results;
+function push(array,item){
+  array.push(item);
+  return array;
 }
 
+ 
+function map(collection, fn) {
+  // See: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push
+
+  return fold(collection, (acc,x) => push(acc,fn(x)), []);
+}
+
+
+
+function fold(collection, fn, init){
+  let acc = init;
+  for (let item of collection){
+    acc = fn(acc, item);
+  }
+  return acc;
+}
+
+function add3(x){
+  return x + 3;
+}
+function mult3(x){
+  return x*3;
+}
 if (require.main === module) {
   console.log('Running sanity checks for map:');
 
   // Add your own sanity checks here.
   // How else will you be sure your code does what you think it does?
+  console.log(map([1,2,3], add3));
+  console.log(map([1,2,3],mult3));
+
 }
 
 module.exports = map;
