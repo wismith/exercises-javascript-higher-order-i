@@ -13,10 +13,7 @@
  */
 function every(collection, predicate) {
   return fold(collection, function(acc,item){
-    if (!predicate(item)){
-      acc = false;
-    }
-    return acc;
+    return acc && predicate(item);
   },true);
 
   
