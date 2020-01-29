@@ -12,12 +12,17 @@
  *  element of `collection` and `false` otherwise.
  */
 function some(collection, fn) {
+  return fold(collection, (acc,item) => acc || fn(item), false);
+  
+  
+  /*
   return fold(collection, function(acc,item){
     if (fn(item)){
       acc = true;
     }
     return acc;
   },false);
+  */
 }
 
 
